@@ -2,21 +2,24 @@
 
 Набор автотестов для публичного API DummyJSON (эндпоинты Auth и Carts), написанный на Python + pytest.
 
-## Опыт и навыки
+| Coverage | Design | Stack |
+|---|---|---|
+| Authentication and cart CRUD, including negative authorization and missing-resource scenarios | Reusable fixtures and independent tests that assert status codes and response contracts | Python 3.12, pytest, requests |
 
-1. **Опыт ручного тестирования:** 3+ года коммерческого опыта (Webmedia, 2023–2026). Функциональное, интеграционное, регрессионное, smoke, sanity и E2E тестирование Web и Mobile приложений. Тестирование REST API через Postman, Swagger и DevTools. Работа с тестовой документацией в TestRail и баг-трекингом в Jira. Shift-Left подход, RTD-пакеты артефактов, локализация дефектов до уровня сервиса/HTTP/Kafka/БД.
-2. **Опыт нагрузочного тестирования:** Коммерческого опыта нет. Знаком с теорией, ключевыми метриками (RPS, latency, percentiles) и инструментами (JMeter, k6). Готов развиваться в этом направлении.
-3. **Опыт тестирования безопасности:** Специализированного опыта нет. На практике регулярно проверяю авторизацию, управление доступом, работу с JWT-токенами и защиту API-эндпоинтов в рамках интеграционного тестирования микросервисов. Знаком с OWASP Top 10.
-4. **Инструменты, использованные в задании:** Python 3.12, pytest 9.0.3, requests 2.34.2, Git
-5. **Команда для запуска тестов:**
-   ```bash
-   pip install -r requirements.txt
-   pytest -v
-   ```
-6. **Краткий список реализованных проверок:**
-   - **Auth:** успешная авторизация (POST /auth/login), авторизация с неверным паролем (400), получение профиля по токену (GET /auth/me), получение профиля без токена (401)
-   - **Carts:** получение корзин пользователя (GET /carts/user/{userId}), получение корзины по ID (GET /carts/{cartId}), создание корзины (POST /carts/add), обновление корзины (PUT /carts/{cartId}), удаление корзины (DELETE /carts/{cartId})
-   - **Негативные сценарии:** запрос несуществующей корзины (404)
+## Быстрый старт
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pytest -v
+```
+
+## Покрытие
+
+- **Auth:** успешный и неуспешный вход, получение профиля с токеном и без него.
+- **Carts:** получение, создание, обновление и удаление корзины.
+- **Negative paths:** неверные credentials, отсутствующая авторизация и несуществующий ресурс.
 
 ## Структура проекта
 
