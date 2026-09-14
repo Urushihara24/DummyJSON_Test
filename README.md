@@ -1,12 +1,21 @@
 # API Tests for DummyJSON
 
-Набор автотестов для публичного API DummyJSON (эндпоинты Auth и Carts), написанный на Python + pytest.
+> QA automation practice project focused on API checks, reusable pytest fixtures, negative scenarios, and CI.
+
+A set of automated tests for the public DummyJSON API (`Auth` and `Carts` endpoints), written with Python and pytest.
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/pytest-34A853?style=for-the-badge&logo=pytest&logoColor=white" alt="pytest">
+  <img src="https://img.shields.io/badge/Requests-HTTP-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Requests">
+  <img src="https://img.shields.io/badge/GitHub_Actions-CI-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" alt="GitHub Actions">
+</p>
 
 | Coverage | Design | Stack |
 |---|---|---|
 | Authentication and cart CRUD, including negative authorization and missing-resource scenarios | Reusable fixtures and independent tests that assert status codes and response contracts | Python 3.12, pytest, requests |
 
-## Быстрый старт
+## Quick start
 
 ```bash
 python -m venv .venv
@@ -15,33 +24,34 @@ pip install -r requirements.txt
 pytest -v
 ```
 
-## Покрытие
+## Coverage
 
-- **Auth:** успешный и неуспешный вход, получение профиля с токеном и без него.
-- **Carts:** получение, создание, обновление и удаление корзины.
-- **Negative paths:** неверные credentials, отсутствующая авторизация и несуществующий ресурс.
+- **Auth:** successful and failed login, profile retrieval with and without a token.
+- **Carts:** retrieve, create, update, and delete a cart.
+- **Negative paths:** invalid credentials, missing authorization, and a nonexistent resource.
 
-## Структура проекта
+## Project structure
 
-```
+```text
 DummyJSON_Test/
 ├── tests/
-│   ├── test_auth.py      # Тесты авторизации
-│   └── test_carts.py     # Тесты корзин
-├── conftest.py           # Фикстуры pytest (получение токена)
-├── requirements.txt      # Зависимости
-└── README.md             # Документация
+│   ├── test_auth.py      # Authentication tests
+│   └── test_carts.py     # Cart tests
+├── conftest.py           # pytest fixtures, including token retrieval
+├── requirements.txt      # Dependencies
+└── README.md             # Documentation
 ```
 
-## Особенности реализации
+## Implementation notes
 
-- API DummyJSON является фейковым (in-memory database)
-- При DELETE корзина помечается как `isDeleted: true`, но не удаляется физически
-- При PUT используется параметр `merge: true` для корректного слияния товаров
-- Тесты не зависят друг от друга (кроме фикстуры получения токена)
+- DummyJSON is a fake API backed by an in-memory database.
+- When a cart is deleted, the API marks it as `isDeleted: true` instead of physically removing it.
+- PUT requests use `merge: true` to merge cart items correctly.
+- Tests are independent of each other except for the token fixture.
 
-## Примечание по поведению API
+## API behavior notes
 
-В процессе выполнения задания были выявлены особенности поведения DummyJSON, которые учтены в тестах:
-- API возвращает поле `accessToken` вместо ожидаемого `token` — тесты адаптированы под реальную схему ответа.
-- При неверном пароле API возвращает статус `400 Bad Request` вместо стандартного `401 Unauthorized` — проверка учитывает эту особенность.
+During the assignment, several DummyJSON behavior details were discovered and reflected in the tests:
+
+- The API returns `accessToken` instead of the expected `token`, so the tests follow the actual response schema.
+- An invalid password returns `400 Bad Request` instead of the more typical `401 Unauthorized`, and the negative check accounts for that behavior.
