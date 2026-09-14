@@ -1,0 +1,6 @@
+{
+  "status": "ok",
+  "fixture": "qa-readonly-http",
+  "version": "1.0",
+  "safe": true
+}
