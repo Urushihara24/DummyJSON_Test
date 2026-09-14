@@ -1,0 +1,33 @@
+openapi: 3.0.3
+info:
+  title: QA Read-Only HTTP Fixture
+  version: 1.0.0
+  description: Safe QA-owned read-only HTTP fixture for integration testing.
+servers:
+  - url: https://raw.githubusercontent.com/Urushihara24/DummyJSON_Test/main/integration-fixture
+paths:
+  /response.json:
+    get:
+      summary: Return static QA fixture response
+      operationId: getQaReadonlyFixture
+      responses:
+        '200':
+          description: Static successful QA response
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status, fixture, version, safe]
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  fixture:
+                    type: string
+                    example: qa-readonly-http
+                  version:
+                    type: string
+                    example: '1.0'
+                  safe:
+                    type: boolean
+                    example: true
