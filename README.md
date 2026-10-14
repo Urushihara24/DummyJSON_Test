@@ -1,8 +1,6 @@
-# API Tests for DummyJSON
+# DummyJSON API Regression Suite
 
-> QA automation practice project focused on API checks, reusable pytest fixtures, negative scenarios, and CI.
-
-A set of automated tests for the public DummyJSON API (`Auth` and `Carts` endpoints), written with Python and pytest.
+Working API QA automation suite for the public DummyJSON contract, focused on authentication, cart flows, negative authorization scenarios, reusable pytest fixtures, and repeatable CI execution.
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
@@ -11,9 +9,16 @@ A set of automated tests for the public DummyJSON API (`Auth` and `Carts` endpoi
   <a href="https://github.com/Urushihara24/DummyJSON_Test/actions/workflows/tests.yml"><img src="https://github.com/Urushihara24/DummyJSON_Test/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
 </p>
 
-| Coverage | Design | Stack |
+| Coverage | Test design | Stack |
 |---|---|---|
-| Authentication and cart CRUD, including negative authorization and missing-resource scenarios | Reusable fixtures and independent tests that assert status codes and response contracts | Python 3.12, pytest, requests |
+| Authentication and cart CRUD, including negative authorization and missing-resource scenarios | Reusable fixtures, independent checks, HTTP/status validation and response-contract assertions | Python 3.12 · pytest · requests · GitHub Actions |
+
+## Coverage
+
+- **Authentication:** successful/failed login, authenticated profile retrieval, unauthorized access.
+- **Carts:** read, create, update and delete flows.
+- **Negative paths:** invalid credentials, missing authorization and nonexistent resources.
+- **Contract behavior:** assertions follow the actual upstream response schema instead of assuming conventional status codes or field names.
 
 ## Quick start
 
@@ -24,46 +29,47 @@ pip install -r requirements.txt
 pytest -v
 ```
 
-## Coverage
-
-- **Auth:** successful and failed login, profile retrieval with and without a token.
-- **Carts:** retrieve, create, update, and delete a cart.
-- **Negative paths:** invalid credentials, missing authorization, and a nonexistent resource.
-
 ## Project structure
 
 ```text
 DummyJSON_Test/
 ├── tests/
-│   ├── test_auth.py      # Authentication tests
-│   └── test_carts.py     # Cart tests
-├── conftest.py           # pytest fixtures, including token retrieval
-├── requirements.txt      # Dependencies
-└── README.md             # Documentation
+│   ├── test_auth.py      # authentication and authorization checks
+│   └── test_carts.py     # cart API checks
+├── conftest.py           # reusable pytest fixtures
+├── integration-fixture/  # integration support data
+├── docs/                 # maintenance notes
+├── requirements.txt
+└── README.md
 ```
+
+## API behavior captured by the suite
+
+The automated checks intentionally reflect observed upstream behavior:
+
+- login returns `accessToken` rather than a generic `token` field;
+- invalid passwords currently return `400 Bad Request`;
+- cart deletion is represented by `isDeleted: true` instead of physical removal;
+- cart updates require the API's merge semantics.
+
+These details are treated as external contract behavior. If upstream behavior changes, the live API contract is verified before expected results are updated.
+
+## Engineering notes
+
+- credentials and generated local artifacts are excluded from Git;
+- shared setup is isolated in pytest fixtures;
+- CI executes the suite on repository changes;
+- tests are kept independent where the API allows it;
+- negative checks validate both authorization behavior and missing-resource handling.
 
 ## Maintenance
 
-Repository maintenance and pre-merge checks are documented in [`docs/maintenance.md`](docs/maintenance.md).
-
-## Implementation notes
-
-- DummyJSON is a fake API backed by an in-memory database.
-- When a cart is deleted, the API marks it as `isDeleted: true` instead of physically removing it.
-- PUT requests use `merge: true` to merge cart items correctly.
-- Tests are independent of each other except for the token fixture.
-
-## API behavior notes
-
-During the assignment, several DummyJSON behavior details were discovered and reflected in the tests:
-
-- The API returns `accessToken` instead of the expected `token`, so the tests follow the actual response schema.
-- An invalid password returns `400 Bad Request` instead of the more typical `401 Unauthorized`, and the negative check accounts for that behavior.
+Pre-merge and upstream-contract checks are documented in [`docs/maintenance.md`](docs/maintenance.md).
 
 ---
 
-## More from this profile
+## Related work
 
-- **[Auto-Pricing Bot](https://github.com/Urushihara24/monitoring-bot)** — Python marketplace automation with Telegram controls, Docker, pytest and seller API integrations.
-- **[Commercial AI SaaS QA](https://github.com/Urushihara24/commercial-ai-saas-qa)** — sanitized real-world QA case study with 150+ checks and selected defect reports.
-- **[GitHub profile](https://github.com/Urushihara24)** — selected QA and Python projects.
+- **[Auto-Pricing Bot](https://github.com/Urushihara24/monitoring-bot)** — production marketplace automation with Telegram control, seller APIs, Docker and safety guards.
+- **[Commercial AI SaaS QA](https://github.com/Urushihara24/commercial-ai-saas-qa)** — sanitized commercial QA case with 150+ checks and selected defects.
+- **[GitHub profile](https://github.com/Urushihara24)** — selected QA and Python engineering work.
