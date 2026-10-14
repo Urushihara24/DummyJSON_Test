@@ -42,6 +42,10 @@ DummyJSON_Test/
 └── README.md             # Documentation
 ```
 
+## Maintenance
+
+Repository maintenance and pre-merge checks are documented in [`docs/maintenance.md`](docs/maintenance.md).
+
 ## Implementation notes
 
 - DummyJSON is a fake API backed by an in-memory database.
