@@ -8,7 +8,7 @@ A set of automated tests for the public DummyJSON API (`Auth` and `Carts` endpoi
   <img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
   <img src="https://img.shields.io/badge/pytest-34A853?style=for-the-badge&logo=pytest&logoColor=white" alt="pytest">
   <img src="https://img.shields.io/badge/Requests-HTTP-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Requests">
-  <img src="https://img.shields.io/badge/GitHub_Actions-CI-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" alt="GitHub Actions">
+  <a href="https://github.com/Urushihara24/DummyJSON_Test/actions/workflows/tests.yml"><img src="https://github.com/Urushihara24/DummyJSON_Test/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
 </p>
 
 | Coverage | Design | Stack |
@@ -59,3 +59,11 @@ During the assignment, several DummyJSON behavior details were discovered and re
 
 - The API returns `accessToken` instead of the expected `token`, so the tests follow the actual response schema.
 - An invalid password returns `400 Bad Request` instead of the more typical `401 Unauthorized`, and the negative check accounts for that behavior.
+
+---
+
+## More from this profile
+
+- **[Auto-Pricing Bot](https://github.com/Urushihara24/monitoring-bot)** — Python marketplace automation with Telegram controls, Docker, pytest and seller API integrations.
+- **[Commercial AI SaaS QA](https://github.com/Urushihara24/commercial-ai-saas-qa)** — sanitized real-world QA case study with 150+ checks and selected defect reports.
+- **[GitHub profile](https://github.com/Urushihara24)** — selected QA and Python projects.
