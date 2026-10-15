@@ -7,6 +7,7 @@ Working API QA automation suite for the public DummyJSON contract, focused on au
   <img src="https://img.shields.io/badge/pytest-34A853?style=for-the-badge&logo=pytest&logoColor=white" alt="pytest">
   <img src="https://img.shields.io/badge/Requests-HTTP-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Requests">
   <a href="https://github.com/Urushihara24/DummyJSON_Test/actions/workflows/tests.yml"><img src="https://github.com/Urushihara24/DummyJSON_Test/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
+  <a href="https://github.com/Urushihara24/DummyJSON_Test/actions/workflows/security.yml"><img src="https://github.com/Urushihara24/DummyJSON_Test/actions/workflows/security.yml/badge.svg" alt="Security"></a>
 </p>
 
 | Coverage | Test design | Stack |
@@ -59,6 +60,7 @@ These details are treated as external contract behavior. If upstream behavior ch
 - credentials and generated local artifacts are excluded from Git;
 - shared setup is isolated in pytest fixtures;
 - CI executes the suite on repository changes;
+- dependency security is checked with a scheduled and change-triggered audit;
 - tests are kept independent where the API allows it;
 - negative checks validate both authorization behavior and missing-resource handling.
 
